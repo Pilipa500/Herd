@@ -4,9 +4,11 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TaskController;
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+
 
 //tuve que añadir esta ruta porque no veia el archivo index.
 Route::get('/tasks', function () {
@@ -27,6 +29,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+//aseguro que las rutas del registro están correctas 
+Route::middleware(['guest'])->group(function () {
+    Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
+    Route::post('/register', [RegisteredUserController::class, 'store']);
+});
+
+
+//tuve que añadir esta ruta para el archivo home.
+Route::get('/home', function () {
+    return view('home');
 });
 
 require __DIR__.'/auth.php';

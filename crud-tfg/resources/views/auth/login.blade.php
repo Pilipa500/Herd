@@ -1,4 +1,18 @@
+@extends('layouts.base')
+@section('content')
+
 <x-guest-layout>
+        <!-- Enlace a la página principal -->
+    <div class="text-center mb-4">
+        <a href="{{ url('/home') }}" class="text-decoration-none">
+            <div style="display: inline-block; background-color: white; padding: 10px; border-radius: 50%;">
+                <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="Home" width="40" height="40" style="vertical-align: middle;">
+            </div>
+            <p class="text-white mt-2">Inicio</p>
+        </a>
+    </div>
+
+     
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
