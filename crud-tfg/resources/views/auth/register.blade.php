@@ -42,9 +42,9 @@
 
                         <!-- Año de Graduación -->
                         <div class="mb-3">
-                            <label for="graduacion" class="form-label">Año de graduación</label>
-                            <input id="graduacion" type="number" class="form-control" name="graduacion" value="{{ old('graduacion') }}" required>
-                            @error('graduacion')
+                            <label for="anio_graduacion" class="form-label">Año de graduación</label>
+                            <input id="anio_graduacion" type="number" class="form-control" name="anio_graduacion" value="{{ old('anio_graduacion') }}" required>
+                            @error('anio_graduacion')
                                 <div class="text-danger small">{{ $message }}</div>
                             @enderror
                         </div>

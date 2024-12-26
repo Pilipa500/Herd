@@ -8,6 +8,10 @@ use App\Http\Controllers\TaskController;
 //     return view('welcome');
 // });
 
+//tuve que añadir esta ruta para el archivo home.
+Route::get('/home', function () {
+    return view('home');
+});
 
 
 //tuve que añadir esta ruta porque no veia el archivo index.
@@ -37,10 +41,5 @@ Route::middleware(['guest'])->group(function () {
     Route::post('/register', [RegisteredUserController::class, 'store']);
 });
 
-
-//tuve que añadir esta ruta para el archivo home.
-Route::get('/home', function () {
-    return view('home');
-});
 
 require __DIR__.'/auth.php';
