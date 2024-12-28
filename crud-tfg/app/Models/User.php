@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -45,4 +46,15 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+}
+//añadí la siguiente dirección para que se pueda ver la tabla de usuarios
+
+namespace App\Models\User;
+class UserController extends Controller
+{
+public function index()
+{
+    $usuarios = User::all();
+    return view('usuarios.index', compact('usuarios'));
+}
 }

@@ -74,7 +74,7 @@
         </div>
     </main>
     <footer>
-        <p>&copy; 2024 Conecta con tus Compañeros - Todos los derechos reservados.</p>
+        <p>&copy; 2025 Conecta con tus Compañeros - Todos los derechos reservados.</p>
     </footer>
 
     <!-- Bootstrap Bundle with Popper -->

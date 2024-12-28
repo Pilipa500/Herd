@@ -2,6 +2,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\UsuarioController;
 
 
 // Route::get('/', function () {
@@ -41,5 +43,10 @@ Route::middleware(['guest'])->group(function () {
     Route::post('/register', [RegisteredUserController::class, 'store']);
 });
 
+//rutas para el registro de usuarios
+Route::get('/register', [UsuarioController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [UsuarioController::class, 'register']);
 
+//ruta para la vista de usuarios.
+Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
 require __DIR__.'/auth.php';
