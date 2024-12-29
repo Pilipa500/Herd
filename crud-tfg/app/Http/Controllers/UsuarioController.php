@@ -28,7 +28,7 @@ class UsuarioController extends Controller
     $imageName = time().'.'.$request->profile_image->extension();  
     $request->profile_image->move(public_path('images'), $imageName);
 
-    Usuario::create([
+    Usuarios::create([
         'nombre' => $request->name,
         'email' => $request->email,
         'password' => Hash::make($request->password),

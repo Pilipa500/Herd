@@ -49,12 +49,12 @@ class User extends Authenticatable
 }
 //añadí la siguiente dirección para que se pueda ver la tabla de usuarios
 
-namespace App\Models\User;
-class UserController extends Controller
-{
-public function index()
-{
-    $usuarios = User::all();
-    return view('usuarios.index', compact('usuarios'));
-}
-}
+// namespace App\Models\User;
+// class UserController extends Controller
+// {
+// public function index()
+// {
+//     $usuarios = User::all();
+//     return view('usuarios.index', compact('usuarios'));
+// }
+// }
