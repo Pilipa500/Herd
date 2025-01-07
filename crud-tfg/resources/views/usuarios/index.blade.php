@@ -13,7 +13,7 @@
 
     @if (Session::get('success'))
     <div class="alert alert-success mt-2">
-        <strong>{{ Session::get('success') }}<br>
+        <strong>{{ Session::get('success') }}</strong><br>
     </div>
     @endif
 
