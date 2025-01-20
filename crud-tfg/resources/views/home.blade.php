@@ -33,7 +33,7 @@
             margin-top: 50px;
             padding: 20px;
         }
-        .btn-register {
+        .btn-registro {
             margin-top: 20px;
         }
         footer {
@@ -48,7 +48,7 @@
     <header class="p-3 bg-dark text-white">
         <div class="container d-flex justify-content-between align-items-center">
             <h1 class="h4">Conecta con tus Compañeros</h1>
-            <a href="/register" class="btn btn-primary">Registrarse</a>
+            <a href="/registro" class="btn btn-primary">Registrarse</a>
         </div>
     </header>
     <main class="container">
@@ -58,7 +58,7 @@
                 Encuentra a tus compañeros de colegio, instituto o universidad, y conecta con ellos. 
                 Regístrate y accede a una base de datos diseñada para ayudarte a localizar a tus viejos amigos.
             </p>
-            <a href="{{ route('register') }}" class="btn btn-success btn-lg btn-register">Comienza Ahora</a>
+            <a href="{{ route('registro')}}" class="btn btn-success btn-lg btn-register">Comienza Ahora</a>
         </div>
         <div class="row text-white mt-5">
             <div class="col-md-6">

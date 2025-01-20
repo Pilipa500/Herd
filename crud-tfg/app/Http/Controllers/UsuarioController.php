@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Usuarios; // Asegúrate de importar el modelo Usuario
+use App\Models\Usuarios; // Importar el modelo Usuario
 use Illuminate\Support\Facades\Hash;
 
 class UsuarioController extends Controller
@@ -18,8 +18,8 @@ class UsuarioController extends Controller
         return view('usuarios.create');
     }
 
-
-    public function register(Request $request)
+    public function store(Request $request)
+    // public function register(Request $request) este es el que estaba hasta ahora x el video
 {
     $request->validate([
         'name' => 'required|string|max:30',
@@ -45,11 +45,13 @@ class UsuarioController extends Controller
     ]);
 
     //guardar el usuario en la base de datos(intenté esta nueva forma de guardar el usuario)
-    $usuario->save();
+    Usuarios::create($usuario->toArray());
+    //$usuario->save();
 
     return redirect()->route('usuarios.index')->with('success', 'Usuario registrado exitosamente.');
-    // return redirect()->route('home')->with('success', 'Usuario registrado exitosamente');
+    // return redirect()->route('home')->with('success', 'Usuario registrado exitosamente'); este lo tuve al principio
 }
+//otros metodos para completar el crud de usuarios
 public function show($id)
     {
         $usuario = Usuarios::findOrFail($id);

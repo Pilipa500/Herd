@@ -1,3 +1,4 @@
+<!-- filepath: /c:/Users/pilip/Herd/crud-tfg/resources/views/registro.blade.php -->
 @extends('layouts.base')
 
 @section('content')
@@ -16,18 +17,33 @@
         <div class="col-md-6">
             <div class="card text-dark bg-light">
                 <div class="card-header text-center bg-primary text-white">
-                    <h3>Formulario de Registro</h3>
+                    <h3>Formulario de Registro de Nuevos Alumnos</h3>
                 </div>
                 <div class="card-body">
-                    {{--Podría ser este, pero no tengo hecho el usuarios.store, por eso pongo 'register' <form method="POST" action="{{ route('usuarios.store') }}" enctype="multipart/form-data"> --}}
-                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+                    @if (Session::get('success'))
+                        <div class="alert alert-success">
+                            {{ Session::get('success') }}
+                        </div>
+                    @endif
+
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    <form method="POST" action="{{ route('nuevosalumnos.store') }}" enctype="multipart/form-data">
                         @csrf
 
                         <!-- Nombre -->
                         <div class="mb-3">
-                            <label for="name" class="form-label">Nombre</label>
-                            <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required>
-                            @error('name')
+                            <label for="nombre" class="form-label">Nombre</label>
+                            <input id="nombre" type="text" class="form-control" name="nombre" value="{{ old('nombre') }}" required>
+                            @error('nombre')
                                 <div class="text-danger small">{{ $message }}</div>
                             @enderror
                         </div>
@@ -50,11 +66,11 @@
                             @enderror
                         </div>
 
-                        <!-- Imagen de Perfil -->
+                        <!-- Curso -->
                         <div class="mb-3">
-                            <label for="profile_image" class="form-label">Imagen de perfil</label>
-                            <input id="profile_image" type="file" class="form-control" name="profile_image" accept="image/*" required>
-                            @error('profile_image')
+                            <label for="curso" class="form-label">Curso</label>
+                            <input id="curso" type="text" class="form-control" name="curso" value="{{ old('curso') }}" required>
+                            @error('curso')
                                 <div class="text-danger small">{{ $message }}</div>
                             @enderror
                         </div>
@@ -86,11 +102,17 @@
                             @enderror
                         </div>
 
-                        <!-- Botón de Registro y Acceso -->
+                        <!-- Rol ID -->
+                        <div class="mb-3">
+                            <label for="rol_id" class="form-label">Rol ID</label>
+                            <input id="rol_id" type="number" class="form-control" name="rol_id" value="{{ old('rol_id') }}" required>
+                            @error('rol_id')
+                                <div class="text-danger small">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <!-- Botón de Registro -->
                         <div class="d-flex justify-content-between align-items-center mt-4">
-                            <a href="{{ url('login') }}" class="text-primary text-decoration-underline">
-                                ¿Ya estás registrado? Inicia sesión aquí
-                            </a>
                             <button type="submit" class="btn btn-primary">
                                 Registrar
                             </button>

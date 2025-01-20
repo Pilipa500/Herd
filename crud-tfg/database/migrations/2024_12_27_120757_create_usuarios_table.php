@@ -21,7 +21,6 @@ class CreateUsuariosTable extends Migration
                 $table->string('colegio', 100);
                 $table->string('curso', 30);
                 $table->year('anio_graduacion');
-                $table->string('foto', 255);
                 $table->timestamp('fecha_registro')->default(DB::raw('CURRENT_TIMESTAMP'))->onUpdate(DB::raw('CURRENT_TIMESTAMP'));
                 $table->integer('rol_id')->default(1);
                 $table->timestamps();

@@ -7,7 +7,8 @@
             <h2 class="text-white">Listado de Usuarios</h2>
         </div>
         <div>
-            <a href="{{ route('usuarios.create') }}" class="btn btn-primary">Crear Usuario</a>
+            {{--este es el enlace que tenia hasta ahora pero copilot me sugiere el de abajo <a href="{{ route('register') }}" class="btn btn-primary">Registro de Usuario</a> --}}
+            <a href="{{ route('usuarios.create') }}" class="btn btn-primary">Registro de Usuario</a>
         </div>
     </div>
 
