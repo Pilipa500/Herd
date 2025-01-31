@@ -39,4 +39,35 @@ class NuevosalumnosController extends Controller
          return redirect('/registro')->with('success', 'Usuario registrado exitosamente.');
         
     }
+
+    //métodos para buscar y buscarResultados de los alumnos
+    public function buscar()
+{
+    return view('buscar');
+}
+
+public function buscarResultados(Request $request)
+{
+    $query = NuevosAlumnos::query();
+
+    if ($request->filled('nombre')) {
+        $query->where('nombre', 'like', '%' . $request->nombre . '%');
+    }
+
+    if ($request->filled('colegio')) {
+        $query->where('colegio', 'like', '%' . $request->colegio . '%');
+    }
+
+    if ($request->filled('curso')) {
+        $query->where('curso', 'like', '%' . $request->curso . '%');
+    }
+
+    if ($request->filled('anio_graduacion')) {
+        $query->where('anio_graduacion', $request->anio_graduacion);
+    }
+
+    $resultados = $query->get();
+
+    return view('resultados', compact('resultados'));
+}
 }

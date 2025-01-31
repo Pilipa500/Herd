@@ -84,19 +84,14 @@ Route::get('/registro', function () {
 })->name('registro');//definició de la ruta con nombre para referenciarla de manera más flexible y robusta
 
 //ruta para manejar la inserción de nuevos alumnos
-Route::post('/nuevosalumnos', [NuevosalumnosController::class, 'store'])->name('nuevosalumnos.store') ;
+//Route::post('/nuevosalumnos', [NuevosalumnosController::class, 'store'])->name('nuevosalumnos.store') ;
+Route::resource('nuevosalumnos', NuevosalumnosController::class);
 
-// Rutas para el sistema de mensajería Se aplica el middleware de autenticación para proteger las rutas
-//solo los usuarios autenticados pueden acceder a estas rutas
-Route::middleware('auth')->group(function () {
-    // Ruta para hacer una lista con los mensajes
-    Route::get('/mensajes', [MensajeController::class, 'index'])->name('mensajes.index');
-    // Ruta para mostrar el formulario de creación de mensajes
-    Route::get('/mensajes/crear', [MensajeController::class, 'create'])->name('mensajes.create');
-    // Ruta para almacenar un nuevo mensaje
-    Route::post('/mensajes', [MensajeController::class, 'store'])->name('mensajes.store');
-    // Ruta para mostrar un mensaje específico
-    Route::get('/mensajes/{id}', [MensajeController::class, 'show'])->name('mensajes.show');
-});
+//ruta para el buscador
+Route::get('/buscar', [NuevosalumnosController::class, 'buscar'])->name('buscar');
+Route::post('/buscar', [NuevosalumnosController::class, 'buscarResultados'])->name('buscar.resultados');
 
+// Rutas para el sistema de mensajería. Cambié el anterior, por este que sustituye con un 
+//solo comando a todas las rutas anteriores.
+Route::resource('mensajes', MensajeController::class);
 require __DIR__.'/auth.php';

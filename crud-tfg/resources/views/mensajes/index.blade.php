@@ -2,7 +2,9 @@
 
 @section('content')
 <div class="container mt-5">
-    <h1>Mensajes</h1>
+    <div class="mb-3">
+    <h1>Muestra todos los Mensajes</h1>
+    </div>
     @if (Session::get('success'))
         <div class="alert alert-success">
             {{ Session::get('success') }}

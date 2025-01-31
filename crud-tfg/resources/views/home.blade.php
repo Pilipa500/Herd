@@ -63,8 +63,8 @@
         <div class="row text-white mt-5">
             <div class="col-md-6">
                 <img src="/imagenes/jovenes_400x300.jpg" alt="Jóvenes charlando" class="img-fluid rounded">
-                <h3 class="mt-3">Conversa en el Foro</h3>
-                <p>Deja mensajes, organiza reuniones y mantente en contacto.</p>
+                <h3 class="mt-3"><a href="{{route('buscar')}}">Encuentra a tus amigos</a></h3>
+                <p><a href="{{route('mensajes.create')}}">Envia mensajes,</a> organiza reuniones y mantente en contacto.</p>
             </div>
             <div class="col-md-6">
                 <img src="/imagenes/400x300Niños_Jugando.png" alt="Niños jugando" class="img-fluid rounded">
