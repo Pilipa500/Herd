@@ -6,6 +6,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\nuevosalumnos;//importé el model de nuevosalumnos
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class NuevosalumnosController extends Controller
 {
@@ -70,4 +72,47 @@ public function buscarResultados(Request $request)
 
     return view('resultados', compact('resultados'));
 }
+  //a partir de aquí añadí el código para el login y logout
+  public function showLoginForm()
+  {
+      return view('auth.login');
+  }
+  
+  public function login(Request $request)
+  {
+      // Validación de los campos
+      $request->validate([
+          'email' => 'required|email',
+          'password' => 'required|min:6',
+      ]);
+  
+      // Intentar la autenticación usando la tabla nuevosalumnos
+         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+
+          $request->session()->regenerate();
+  
+          // Obtener el usuario autenticado
+          $user = Auth::user();
+
+  
+          // Redirigir al perfil del alumno autenticado
+          return redirect()->route('profile', ['id' => $user->id]);
+
+      }
+  
+      // En caso de fallo, retornar con error
+      throw ValidationException::withMessages([
+          'email' => 'Las credenciales proporcionadas no coinciden con nuestros registros.',
+      ]);
+  }
+  
+  public function logout(Request $request)
+  {
+      Auth::guard('web')->logout();
+      $request->session()->invalidate();
+      $request->session()->regenerateToken();
+      return redirect('logout');
+  }
+  
 }
+?>

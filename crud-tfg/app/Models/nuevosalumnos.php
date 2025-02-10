@@ -2,20 +2,28 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class Nuevosalumnos extends Model
+class Nuevosalumnos extends Authenticatable
 {
+    use Notifiable; // Permite enviar notificaciones en el futuro
+
+    // Nombre de la tabla asociada al modelo
+    protected $table = 'nuevosalumnos';
+
+    // Campos que se pueden asignar masivamente
     protected $fillable = [
         'nombre', 'email', 'password', 'colegio', 'anio_graduacion', 'curso', 'rol_id'
     ];
 
-    protected $table = 'nuevosalumnos';
+    // Campos ocultos cuando se serializa el modelo
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
 
-    // Mutator para convertir la contraseña en un hash antes de guardarla en la base de datos
-    public function setPasswordAttribute($value)
-    {
-        $this->attributes['password'] = Hash::make($value);
-    }
+    // Cast automático para la contraseña (Laravel 10+)
+    protected $casts = [
+        'password' => 'hashed', // Laravel encripta automáticamente la contraseña
+    ];
 }

@@ -101,5 +101,5 @@ public function show($id)
         $usuario->delete();
             return redirect()->route('usuarios.index')->with('success', 'Usuario eliminado exitosamente.');
     }
-
+  
 }

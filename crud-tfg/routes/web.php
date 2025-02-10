@@ -9,6 +9,7 @@ use App\Http\Controllers\NuevosalumnosController;
 use App\Http\Controllers\MensajeController;
 
 
+
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -16,7 +17,7 @@ use App\Http\Controllers\MensajeController;
 //tuve que añadir esta ruta para el archivo home.
 Route::get('/home', function () {
     return view('home');
-});
+})->name('home');
 
 
 //tuve que añadir esta ruta porque no veia el archivo index.
@@ -36,37 +37,29 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 //rutas para el perfil
+
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/profile/{id}', [ProfileController::class, 'show'])->name('profile');
+    Route::get('/profile/{id}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::delete('/profile/{id}/destroy', [ProfileController::class, 'update'])->name('profile.destroy');
 });
 
-// Rutas para el registro de usuarios (asegurarme de que no haya duplicación)
+
+// Rutas para el registro de nuevos alumnos
 Route::middleware(['guest'])->group(function () {
-    Route::get('/register', [UsuarioController::class, 'showRegistrationForm'])->name('register');
-    Route::post('/register', [UsuarioController::class, 'register']);
+    Route::get('/registro', [NuevosalumnosController::class, 'create'])->name('registro');
+    Route::post('/registro', [NuevosalumnosController::class, 'store']);
 });
-
-// //aseguro que las rutas del registro están correctas 
-// Route::middleware(['guest'])->group(function () {
-//     Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
-//     Route::post('/register', [RegisteredUserController::class, 'store']);
-// });
-
-//rutas para el registro de usuarios
-// Route::get('/register', [UsuarioController::class, 'showRegistrationForm'])->name('register');
-// Route::post('/register', [UsuarioController::class, 'register']);
 
 //ruta para la vista de usuarios.
-Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
-//definición de las rutas para el CRUD de usuarios
-Route::get('/usuarios/create', [UsuarioController::class, 'create'])->name('usuarios.create');
-Route::post('/usuarios', [UsuarioController::class, 'store'])->name('usuarios.store');
-Route::get('/usuarios/{id}', [UsuarioController::class, 'show'])->name('usuarios.show');
-Route::get('/usuarios/{id}/edit', [UsuarioController::class, 'edit'])->name('usuarios.edit');
-Route::put('/usuarios/{id}', [UsuarioController::class, 'update'])->name('usuarios.update');
-Route::delete('/usuarios/{id}', [UsuarioController::class, 'destroy'])->name('usuarios.destroy');
+// Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
+// //definición de las rutas para el CRUD de usuarios
+// Route::get('/usuarios/create', [UsuarioController::class, 'create'])->name('usuarios.create');
+// Route::post('/usuarios', [UsuarioController::class, 'store'])->name('usuarios.store');
+// Route::get('/usuarios/{id}', [UsuarioController::class, 'show'])->name('usuarios.show');
+// Route::get('/usuarios/{id}/edit', [UsuarioController::class, 'edit'])->name('usuarios.edit');
+// Route::put('/usuarios/{id}', [UsuarioController::class, 'update'])->name('usuarios.update');
+// Route::delete('/usuarios/{id}', [UsuarioController::class, 'destroy'])->name('usuarios.destroy');
 
 Route::get('/formulario', function () {
     return view('formulario');
@@ -81,7 +74,7 @@ Route::get('/registro', function () {
 
     return view('registro');
 
-})->name('registro');//definició de la ruta con nombre para referenciarla de manera más flexible y robusta
+})->name('registro');//definición de la ruta con nombre para referenciarla de manera más flexible y robusta
 
 //ruta para manejar la inserción de nuevos alumnos
 //Route::post('/nuevosalumnos', [NuevosalumnosController::class, 'store'])->name('nuevosalumnos.store') ;
@@ -94,4 +87,11 @@ Route::post('/buscar', [NuevosalumnosController::class, 'buscarResultados'])->na
 // Rutas para el sistema de mensajería. Cambié el anterior, por este que sustituye con un 
 //solo comando a todas las rutas anteriores.
 Route::resource('mensajes', MensajeController::class);
+
+// Rutas para el inicio de sesión
+Route::get('/login', [NuevosalumnosController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [NuevosalumnosController::class, 'login']);
+Route::post('/logout', [NuevosalumnosController::class, 'logout'])->name('logout');
+
+
 require __DIR__.'/auth.php';
