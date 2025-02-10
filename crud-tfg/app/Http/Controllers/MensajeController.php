@@ -15,6 +15,7 @@ class MensajeController extends Controller
         //nuevo metodo index que obtiene todos los mensajes el anterior solo 
         //mostraba los mensajes donde el usuario autenticado era el receptor y no TODOS.
         $mensajes = Mensaje::all();
+        $mensajes = Mensaje::latest()->paginate(5);
         return view('mensajes.index', compact('mensajes'));
 
     }

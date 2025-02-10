@@ -26,6 +26,8 @@
         @endforeach
          <!-- Finaliza la iteración sobre los mensajes -->
     </ul>
+    {{-- Esta es la insercción para el paginador. En el controlador le puse que los mostrase de 5 en 5 --}}
+    {{$mensajes->links()}}
 </div> 
 @endsection
 <!-- Finaliza la sección de contenido de la plantilla -->
