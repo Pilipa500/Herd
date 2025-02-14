@@ -1,19 +1,19 @@
 @extends('layouts.base')
 
 @section('content')
-    <div class="container mt-5">
-        <h1>Mensaje</h1>
-        <div class="mb-3">
-            <p><strong>De: </strong> {{ $mensaje->emisor_id }}</p>
-        </div>
-        <div class="mb-3">
-            <p><strong>Para: </strong> {{ $mensaje->receptor_id }}</p>
-        </div>
-        <div class="mb-3">
-            <p><strong>Contenido: </strong> {{ $mensaje->contenido }}</p>
-        </div>
-        <div class="card-footer text-right">
-            <a href="{{ route('mensajes.index') }}" class="btn btn-primary">Volver a la lista</a>
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-body text-dark">
+            <h5 class="card-title">
+                Mensaje de {{ $mensaje->emisor->nombre }} para {{ $mensaje->receptor->nombre }}
+            </h5>
+            <p class="card-text">{{ $mensaje->contenido }}</p>
+            <p class="text-muted small">Enviado el {{ $mensaje->created_at->format('d/m/Y H:i') }}</p>
+
+            {{-- Botón dinámico para volver a la página anterior --}}
+            <a href="{{ url()->previous() }}" class="btn btn-secondary">Volver</a>
+            {{-- <a href="{{ route('mensajes.index') }}" class="btn btn-secondary">Volver a mensajes</a> --}}
         </div>
     </div>
+</div>
 @endsection

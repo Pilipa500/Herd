@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
+use App\Models\Mensaje;
+
 class NuevosalumnosController extends Controller
 {
     public function store(Request $request)
@@ -113,6 +115,19 @@ public function buscarResultados(Request $request)
       $request->session()->regenerateToken();
       return redirect('logout');
   }
+
+  public function index()
+{
+    $usuarioId = auth()->id(); // Obtener el ID del usuario autenticado
+
+    // Obtener mensajes donde el usuario es emisor o receptor
+    $mensajes = Mensaje::where('emisor_id', $usuarioId)
+                ->orWhere('receptor_id', $usuarioId)
+                ->latest()
+                ->paginate(5);
+
+    return view('dashboard', compact('mensajes'));
+}
   
 }
 ?>

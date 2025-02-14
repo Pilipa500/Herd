@@ -88,6 +88,12 @@ Route::post('/buscar', [NuevosalumnosController::class, 'buscarResultados'])->na
 //solo comando a todas las rutas anteriores.
 Route::resource('mensajes', MensajeController::class);
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [NuevosalumnosController::class, 'index'])->name('dashboard');
+    Route::resource('mensajes', MensajeController::class);
+    //Route::resource('/buscar', NuevosalumnosController::class);
+});
+
 // Rutas para el inicio de sesión
 Route::get('/login', [NuevosalumnosController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [NuevosalumnosController::class, 'login']);

@@ -1,34 +1,18 @@
-{{-- <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("Has iniciado la sesión!") }}
-                </div>
-            </div>
-        </div>
-    </div>
-</x-app-layout> --}}
-
 @extends('layouts.base')
+
 @section('content')
 <div class="container mt-4">
-    <div class="card">
-        <div class="card-header bg-light text-dark d-flex justify-content-between align-items-center">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
             {{-- Nombre del perfil del alumno --}}
-            <h1 class="m-0">Perfil de {{ Auth::user()->nombre }}</h1>
-            {{-- Botón de logout --}}
+            <h1 class="m-0 font-weight-bold">Perfil de {{ Auth::user()->nombre }}</h1>
+            {{-- Botón de logout (en rojo) --}}
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button type="submit" class="btn btn-danger">Cerrar Sesión</button>
+            </form>
         </div>
-        <div class="card-body text-dark">
+        <div class="card-body bg-light text-dark">
             <p><strong>Email:</strong> {{ Auth::user()->email }}</p>
             <p><strong>Colegio:</strong> {{ Auth::user()->colegio }}</p>
             <p><strong>Curso:</strong> {{ Auth::user()->curso }}</p>
@@ -36,5 +20,67 @@
         </div>
     </div>
 </div>
-@endsection
+{{-- 🔍 Sección de búsqueda de amigos --}}
+<div class="container mt-4">
+    <h2 class="text-primary font-weight-bold">🔍 Buscar amigos</h2>
+    <p>En este apartado puede buscar a tus compañeros: por nombre, colegio, años de graduación, etc. Una vez que sepas sus datos, podrás ponerte en contacto con ellos escribiéndoles un mensaje.</p>
+    {{-- Botón para acceder a la función de búsqueda --}}
+    <a href="{{ route('buscar') }}" class="btn btn-success btn-lg font-weight-bold">Buscar amigos</a>
+</div>
 
+{{-- 📩 Sección de Mensajes --}}
+<div class="container mt-4">
+    <h2 class="text-danger font-weight-bold">📩 Mensajes con tus contactos</h2>
+    {{-- //verifica si la variable mensajes está definida --}}
+    @isset($mensajes)
+        @if($mensajes->isEmpty())
+            <p class="alert alert-warning">No tienes mensajes aún.</p>
+        @else
+            <div class="row">
+                @foreach($mensajes as $mensaje)
+                    <div class="col-md-6">
+                        <div class="card mb-3 shadow-sm 
+                        {{-- Si el usuario autenticado es el emisor del mensaje, la tarjeta tendrá un fondo azul. si es el receptor será de fondo gris --}}
+                            @if($mensaje->emisor_id == auth()->id()) bg-lightblue @else bg-lightgray @endif">
+                            {{-- Cabecera de la tarjeta: muestra el contenido de cada menaje --}}
+                            <div class="card-body text-dark rounded p-3">
+                                <h5 class="card-title font-weight-bold">
+                                    Conversación con 
+                                    @if($mensaje->emisor_id == auth()->id())
+                                    {{-- Si el usuario es el emisor, muestra el nombre del receptor en azul ( text-primary).
+                                         Si el usuario es el receptor, muestra el nombre del emisor en verde ( text-success) --}}
+                                        <span class="text-primary">{{ $mensaje->receptor->nombre }}</span>
+                                    @else
+                                        <span class="text-success">{{ $mensaje->emisor->nombre }}</span>
+                                    @endif
+                                </h5>
+                                <p class="card-text font-weight-bold">{{ $mensaje->contenido }}</p>
+                                <p class="text-muted small font-weight-bold">
+                                    📅 {{ $mensaje->created_at->format('d/m/Y H:i') }}
+                                </p>
+                                {{-- Redirige al detalle de la conversación en mensajes.show --}}
+                                <a href="{{ route('mensajes.show', $mensaje->id) }}" class="btn btn-primary btn-sm">
+                                    Ver conversación
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+            {{ $mensajes->links() }} <!-- Agregamos paginación -->
+        @endif
+    @else
+        <p class="text-danger">⚠ Error: No se han podido cargar los mensajes.</p>
+    @endisset
+</div>
+
+{{-- Estilos personalizados para mejorar contraste --}}
+<style>
+    .bg-lightblue { background-color: #cfe2ff !important; } /* Azul más oscuro para mejorar visibilidad */
+    .bg-lightgray { background-color: #e9ecef !important; } /* Gris más oscuro para mejorar contraste */
+    .text-dark { color: #212529 !important; } /* Asegura texto oscuro en fondos claros */
+    .font-weight-bold { font-weight: bold !important; } /* Hace negritas más evidentes */
+</style>
+
+@endsection
