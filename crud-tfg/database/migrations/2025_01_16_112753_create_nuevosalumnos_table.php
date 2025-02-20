@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('curso', 30);
             $table->year('anio_graduacion');
             $table->timestamp('fecha_registro')->default(DB::raw('CURRENT_TIMESTAMP'))->onUpdate(DB::raw('CURRENT_TIMESTAMP'));
-            $table->integer('rol_id')->default(1);
+            $table->integer('rol_id')->default(1);//por defecto el rol es 1, 2:admin.
             $table->timestamps();
         });
     }

@@ -4,11 +4,13 @@
 <div class="row">
     <div class="col-12">
         <div>
-            <h2 class="text-white">Busca a tus amigos</h2>
+            <h2 class="text-white mb-4">Busca a tus amigos</h2>
         </div>
-        <div>
-            <a href="{{route('tasks.create')}}" class="btn btn-primary">Crear tarea</a>
+        <div class="d-flex mb-4">
+            <a href="{{ route('tasks.create') }}" class="btn btn-success mr-5 custom-spacing">Crear Tarea</a>
+            <a href="{{ route('dashboard') }}" class="btn btn-secondary ml-5">Volver al Perfil</a>
         </div>
+
     </div>
 
     @if (Session::get('success'))
@@ -62,5 +64,11 @@
         {{-- Aqui le añadí al index el paginador de bootstrap con tres páginas indexadas --}}
         {{$tasks->links()}}
     </div>
+    <style>
+        /* estilo para los botones del principio */
+.custom-spacing {
+    margin-right: 20px; 
+}
+    </style>
 </div>
 @endsection

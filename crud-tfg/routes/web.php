@@ -9,11 +9,7 @@ use App\Http\Controllers\NuevosalumnosController;
 use App\Http\Controllers\MensajeController;
 
 
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
+//ruta para la vista de inicio
 //tuve que añadir esta ruta para el archivo home.
 Route::get('/home', function () {
     return view('home');
@@ -49,9 +45,11 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['guest'])->group(function () {
     Route::get('/registro', [NuevosalumnosController::class, 'create'])->name('registro');
     Route::post('/registro', [NuevosalumnosController::class, 'store']);
+  
 });
+Route::resource('nuevosalumnos', NuevosalumnosController::class);//este sustituye a las rutas anteriores
 
-//ruta para la vista de usuarios.
+// /ruta para la vista de usuarios.
 // Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
 // //definición de las rutas para el CRUD de usuarios
 // Route::get('/usuarios/create', [UsuarioController::class, 'create'])->name('usuarios.create');
@@ -70,34 +68,38 @@ Route::post('/prueba', [PruebaController::class, 'store']);
 
 //ruta para mostrar el formulario de registro
 
-Route::get('/registro', function () {
+// Route::get('/registro', function () {
 
-    return view('registro');
+//     return view('registro');
 
-})->name('registro');//definición de la ruta con nombre para referenciarla de manera más flexible y robusta
+// })->name('registro');//definición de la ruta con nombre para referenciarla de manera más flexible y robusta
 
 //ruta para manejar la inserción de nuevos alumnos
 //Route::post('/nuevosalumnos', [NuevosalumnosController::class, 'store'])->name('nuevosalumnos.store') ;
-Route::resource('nuevosalumnos', NuevosalumnosController::class);
 
-//ruta para el buscador
-Route::get('/buscar', [NuevosalumnosController::class, 'buscar'])->name('buscar');
-Route::post('/buscar', [NuevosalumnosController::class, 'buscarResultados'])->name('buscar.resultados');
 
 // Rutas para el sistema de mensajería. Cambié el anterior, por este que sustituye con un 
 //solo comando a todas las rutas anteriores.
 Route::resource('mensajes', MensajeController::class);
-
+//rutas para proteger las rutas de la aplicación, solo los usuarios logados pueden acceder a ellas
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [NuevosalumnosController::class, 'index'])->name('dashboard');
     Route::resource('mensajes', MensajeController::class);
-    //Route::resource('/buscar', NuevosalumnosController::class);
-});
+    Route::get('/buscar', [NuevosalumnosController::class, 'buscar'])->name('buscar');
+    Route::post('/buscar', [NuevosalumnosController::class, 'buscarResultados'])->name('buscar.resultados');
+    Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index'); //ruta para mostrar las tareas
+   });
 
 // Rutas para el inicio de sesión
-Route::get('/login', [NuevosalumnosController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [NuevosalumnosController::class, 'login']);
+Route::middleware(['guest'])->group(function () {
+    Route::get('/login', [NuevosalumnosController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [NuevosalumnosController::class, 'login']);
+    
+});
 Route::post('/logout', [NuevosalumnosController::class, 'logout'])->name('logout');
+// Route::get('/login', [NuevosalumnosController::class, 'showLoginForm'])->name('login');
+// Route::post('/login', [NuevosalumnosController::class, 'login']);
+// Route::post('/logout', [NuevosalumnosController::class, 'logout'])->name('logout');
 
 
 require __DIR__.'/auth.php';

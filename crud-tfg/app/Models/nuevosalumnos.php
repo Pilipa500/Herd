@@ -26,4 +26,12 @@ class Nuevosalumnos extends Authenticatable
     protected $casts = [
         'password' => 'hashed', // Laravel encripta automáticamente la contraseña
     ];
+   
+     // definir el campo del rol del administrador
+    public function isAdmin()
+    {
+       return $this->rol_id == 2;
+    }
+
+
 }
