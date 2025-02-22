@@ -78,14 +78,14 @@
                     @endforeach
 
                     {{-- funcionalidad de las tareas si el usuario es admin --}}
-                    @if (isset($tareas))
+                    @if (Auth::user()->rol_id == 2) <!-- Si el usuario es administrador -->
                         <h2>Tareas</h2>
                         <a href="{{ route('tasks.index') }}" class="btn btn-primary btn-lg" role="button">Ver tareas</a>
                     @else
                         <p class="alert alert-warning">Usuario sin privilegios de admin, sin tareas.</p>
                     @endif
                 </div>
-
+      
                 {{ $mensajes->links() }} <!-- Agregamos paginación -->
             @endif
         @else

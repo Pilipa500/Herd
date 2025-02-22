@@ -3,6 +3,9 @@
 @section('content')
 <div class="container mt-5">
     <h1 class="mb-4 text-mark">Resultados de la búsqueda</h1>
+    <div class="d-flex mb-4">
+       <a href="{{ route('dashboard') }}" class="btn btn-secondary ml-5">Volver al Perfil</a>
+    </div>
     @if($resultados->isEmpty())
         <div class="alert alert-warning" role="alert">
             No se encontraron resultados.

@@ -12,6 +12,9 @@
 
             {{-- Botón dinámico para volver a la página anterior --}}
             <a href="{{ url()->previous() }}" class="btn btn-secondary">Volver</a>
+            <div class="d-flex mb-4">
+               <a href="{{ route('dashboard') }}" class="btn btn-secondary ml-5">Volver al Perfil</a>
+            </div>
             {{-- <a href="{{ route('mensajes.index') }}" class="btn btn-secondary">Volver a mensajes</a> --}}
         </div>
     </div>

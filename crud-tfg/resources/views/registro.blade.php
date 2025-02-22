@@ -34,7 +34,7 @@
                             </ul>
                         </div>
                     @endif
-
+                        {{-- En todos los input si se actualizan los datos, se mantiene en pantalla lo que ya está guardado --}}
                     <form method="POST" action="{{ $alumno ? route('nuevosalumnos.update', $alumno->id) : route('nuevosalumnos.store') }}" enctype="multipart/form-data">
                         @csrf
                         @if ($alumno)

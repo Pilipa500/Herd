@@ -23,7 +23,7 @@
         <table class="table table-bordered text-white">
             <tr class="text-secondary">
                 <th>Tarea</th>
-                <th>Descripción</th>
+                <th>Descripción</th>                                  
                 <th>Fecha</th>
                 <th>Estado</th>
                 <th>Acción</th>
@@ -34,9 +34,7 @@
                 {{-- aqui cambie los datos de prueba por la variable task y sus datos --}}
                 <td class="fw-bold">{{$task->title}}</td>
                 <td>{{$task->description}}</td>
-                <td>
-                    {{$task->due_date}}
-                </td>
+                <td>{{$task->due_date}}</td>
                 <td>
                     {{-- <span class="badge bg-warning fs-6"> --}}
                     <span class="badge fs-6

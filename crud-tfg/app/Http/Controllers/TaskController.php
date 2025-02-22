@@ -15,10 +15,11 @@ class TaskController extends Controller
     public function index(): View
     {
         //Nos retornará la vista del index, de la última a la primera (latest)
-        //y le añadí el paginador de bootsrap con tres páginas para mostrar
-        $tasks = Task::latest()->paginate(3);
+        //y le añadí el paginador de boostrap con cinco páginas para mostrar
+        $tasks = Task::latest()->paginate(5);
         return view('index', ['tasks'=>$tasks]);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -88,7 +89,7 @@ class TaskController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Se borra el recurso especifico del almacenamiento
      */
     public function destroy(task $task): RedirectResponse
     {
