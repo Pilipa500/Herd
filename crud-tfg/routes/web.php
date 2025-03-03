@@ -47,7 +47,7 @@ Route::middleware(['guest'])->group(function () {
     Route::post('/registro', [NuevosalumnosController::class, 'store']);
   
 });
-Route::resource('nuevosalumnos', NuevosalumnosController::class);//este sustituye a las rutas anteriores
+Route::resource('nuevosalumnos', NuevosalumnosController::class);//este sustituye a las rutas que están abajo
 
 // /ruta para la vista de usuarios.
 // Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
@@ -97,9 +97,7 @@ Route::middleware(['guest'])->group(function () {
     
 });
 Route::post('/logout', [NuevosalumnosController::class, 'logout'])->name('logout');
-// Route::get('/login', [NuevosalumnosController::class, 'showLoginForm'])->name('login');
-// Route::post('/login', [NuevosalumnosController::class, 'login']);
-// Route::post('/logout', [NuevosalumnosController::class, 'logout'])->name('logout');
+
 
 
 require __DIR__.'/auth.php';

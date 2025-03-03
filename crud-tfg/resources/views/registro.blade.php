@@ -40,7 +40,8 @@
                         @if ($alumno)
                             @method('PUT') <!-- Método PUT para edición -->
                         @endif
-
+                        {{-- Precarga de datos: Si se está editando, los campos se llenan automáticamente 
+                        con los datos del alumno. Si es un registro, los campos están vacíos --}}
                         <!-- Nombre -->
                         <div class="mb-3">
                             <label for="nombre" class="form-label">Nombre</label>
@@ -86,7 +87,7 @@
                             @enderror
                         </div>
 
-                        <!-- Contraseña (solo para registro) -->
+                        <!-- Contraseña (se muestra solo para registro, no para update) -->
                         @if (!$alumno)
                             <div class="mb-3">
                                 <label for="password" class="form-label">Contraseña</label>
@@ -109,6 +110,7 @@
                         <div class="mb-3">
                             <label for="rol_id" class="form-label">Rol ID</label>
                             <input id="rol_id" type="number" class="form-control" name="rol_id" value="{{ old('rol_id', $alumno ? $alumno->rol_id : '') }}" required>
+                            <p class="small">1: Alumno, 2: Administrador</p>
                             @error('rol_id')
                                 <div class="text-danger small">{{ $message }}</div>
                             @enderror

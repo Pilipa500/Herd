@@ -46,15 +46,20 @@
                         {{$task->status}}
                     </span>
                 </td>
-                <td>
+                <td class="d-flex gap-2">
                     <a href="{{ route('tasks.edit', $task) }}" class="btn btn-warning">Editar</a>
 
+                    <form action="{{ route('tasks.destroy', $task->id) }}" method="POST" onsubmit="return confirmDelete()">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                    </form>
 
-                    <form action="{{route('tasks.destroy', $task)}}" method="POST" class="d-inline">
+                    {{-- <form action="{{route('tasks.destroy', $task)}}" method="POST" class="d-inline">
                         @csrf
                         @method ('DELETE')
                         <button type="submit" class="btn btn-danger">Eliminar</button>
-                    </form>
+                    </form> --}}
                 </td>
             </tr>
             @endforeach
@@ -62,6 +67,12 @@
         {{-- Aqui le añadí al index el paginador de bootstrap con tres páginas indexadas --}}
         {{$tasks->links()}}
     </div>
+    {{-- //Añadí un script para que salga un mensaje de confirmación antes de eliminar una tarea --}}
+    <script>
+        function confirmDelete() {
+            return confirm('¿Estás seguro de que quieres eliminar esta tarea? Esta acción no se puede deshacer.');
+        }
+    </script>
     <style>
         /* estilo para los botones del principio */
 .custom-spacing {

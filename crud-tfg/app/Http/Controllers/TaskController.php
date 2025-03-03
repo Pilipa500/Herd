@@ -10,7 +10,7 @@ use Illuminate\View\View;
 class TaskController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Aquí se muestra la lista de tareas
      */
     public function index(): View
     {
@@ -22,7 +22,6 @@ class TaskController extends Controller
 
 
     /**
-     * Show the form for creating a new resource.
      * Muestra el formulario para crear un nuevo recurso. En este caso se llama create
      */
     public function create(): View
@@ -31,7 +30,6 @@ class TaskController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
      * Aquí guardamos el metodo store para ejecutar la lógica para almacenar
      * el nuevo registro con los datos que vengan del formulario
      */
@@ -58,7 +56,7 @@ class TaskController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     *Aquí se muestra la tarea.
      */
     public function show(task $task)
     {
@@ -66,7 +64,7 @@ class TaskController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Aquí se edita el formulario de recurso de tarea
      */
     public function edit(task $task): View
     {
@@ -74,7 +72,7 @@ class TaskController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Aquí actualizamos el recurso especifico en el almacenamiento
      */
     public function update(Request $request, task $task): RedirectResponse
     {

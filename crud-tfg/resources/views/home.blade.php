@@ -48,6 +48,19 @@
             color: #fff;
             margin-top: 50px;
         }
+                /* Estilo personalizado para el botón naranja */
+        .btn-orange {
+            background-color: orange;
+            border-color: orange;
+            color: white;
+        }
+
+        .btn-orange:hover {
+            background-color: darkorange;
+            border-color: darkorange;
+            color: white;
+        }
+
     </style>
 </head>
 
@@ -82,7 +95,7 @@
                 <img src="/imagenes/400x300Niños_Jugando.png" alt="Niños jugando" class="img-fluid rounded">
                 <h3 class="mt-3">Envia Mensajes</h3>
                 <p>Comunícate con tus amigos, organiza reuniones y mantente en contacto.</p>
-                <a href="{{route('mensajes.create')}}" class="btn btn-secondary">Enviar Mensaje</a>
+                <a href="{{route('mensajes.create')}}" class="btn btn-orange">Enviar Mensaje</a>
             </div>
         </div>
     </main>

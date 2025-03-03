@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
 use App\Models\Nuevosalumnos;//importé el model de Nuevosalumnos
 use Illuminate\Support\Facades\Hash;
@@ -13,7 +12,7 @@ use App\Models\Mensaje;
 
 class NuevosalumnosController extends Controller
 {
-    //método para mostrar el formulario de registro
+    //método para mostrar/guardar el formulario de registro
     public function store(Request $request)
     {//validación de los datos
         $request->validate([
@@ -97,7 +96,7 @@ class NuevosalumnosController extends Controller
     //métodos para buscar y buscarResultados de los alumnos
     public function buscar()
 {
-    //$usuarioId = auth()->id();//buscar solo los alumnos que estén logados
+    //$usuarioId = auth()->id();//buscar solo los alumnos que estén logados. Se puede hacer con un middleware en web.php
     return view('buscar');
 }
 
@@ -150,10 +149,8 @@ public function buscarResultados(Request $request)
           if ($user->isAdmin()) {
             return redirect()->route('admin.dashboard'); // Redirige al dashboard de admin
         }
-
-  
           // Redirigir al perfil del alumno autenticado
-          return redirect()->route('profile', ['id' => $user->id]);
+          //return redirect()->route('profile', ['id' => $user->id]);
 
       }
   
