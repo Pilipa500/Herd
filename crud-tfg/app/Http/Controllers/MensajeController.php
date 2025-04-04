@@ -33,12 +33,13 @@ class MensajeController extends Controller
     public function store(Request $request)
 {
     $request->validate([
-        'nombre_emisor' => 'required|exists:nuevosalumnos,nombre',
+        // 'nombre_emisor' => 'required|exists:nuevosalumnos,nombre',
         'nombre_receptor' => 'required|exists:nuevosalumnos,nombre',
         'contenido' => 'required|string|max:1000',
     ]);
 
-    $emisor = Nuevosalumnos::where('nombre', $request->nombre_emisor)->first();
+    // $emisor = Nuevosalumnos::where('nombre', $request->nombre_emisor)->first();
+    $emisor = auth()->user(); // Suponiendo que el modelo de usuario autenticado es Nuevosalumnos
     $receptor = Nuevosalumnos::where('nombre', $request->nombre_receptor)->first();
     //crear un mensaje
     Mensaje::create([

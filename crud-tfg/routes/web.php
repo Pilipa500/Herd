@@ -32,13 +32,13 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-//rutas para el perfil
+//rutas para el perfil, están en el dashboard, más abajo. Y este no vale.
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile/{id}', [ProfileController::class, 'show'])->name('profile');
-    Route::get('/profile/{id}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::delete('/profile/{id}/destroy', [ProfileController::class, 'update'])->name('profile.destroy');
-});
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile/{id}', [ProfileController::class, 'show'])->name('profile');
+//     Route::get('/profile/{id}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::delete('/profile/{id}/destroy', [ProfileController::class, 'update'])->name('profile.destroy');
+// });
 
 
 // Rutas para el registro de nuevos alumnos

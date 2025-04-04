@@ -80,7 +80,7 @@
             <h1>Bienvenido a la Plataforma para Reencontrarte</h1>
             <p>
                 Encuentra a tus compañeros de colegio, instituto o universidad, y conecta con ellos.
-                Regístrate y accede a una base de datos diseñada para ayudarte a localizar a tus viejos amigos.
+                Regístrate y accede a una base de datos diseñada para ayudarte a localizar a tus amigos.
             </p>
             <a href="{{ route('registro') }}" class="btn btn-success btn-lg btn-register">Comienza Ahora</a>
         </div>
